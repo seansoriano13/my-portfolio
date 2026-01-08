@@ -1,0 +1,10 @@
+<svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!--Lens 1: The "Order" (Stable, intellectual)-->
+  <circle cx="32" cy="50" r="16" stroke="#0c0c0f" stroke-width="1.8" fill="#ffffff"/>
+<!--Lens 2: The "Anxiety" (Distorted, lower, slightly compressed)-->
+  <ellipse cx="70" cy="55" rx="14.5" ry="15.5" stroke="#0c0c0f" stroke-width="1.8" transform="rotate(4 70 55)" fill="#ffffff"/>
+<!--The Bridge: The Tension (Non-parallel, abrupt connection)-->
+  <path d="M48 49.5L55.5 53.5" stroke="#0c0c0f" stroke-width="1.8" stroke-linecap="round" fill="#ffffff"/>
+<!--Subtle Disconnect: A phantom temple line that ends abruptly-->
+  <path d="M16 50H10" stroke="#0c0c0f" stroke-width="1.8" stroke-linecap="round" opacity="0.4" fill="#ffffff"/>
+</svg>

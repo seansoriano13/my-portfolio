@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import 'tailwindcss';
+
+
+@layer components {
+    .slanted-divider {
+        @apply absolute -bottom-52 h-[50dvh] w-full bg-white;
+        transform: rotate(-15deg);
+    }
+    .text-description {
+        @apply font-sans font-light leading-snug text-justify;
+    }
+    .my-project-section-bg {
+        background-image: url('/my-project-section-bg.png');
+        @apply bg-cover bg-center bg-no-repeat;
+    }
+}
+
+@theme {
+    --background-image-my-project-section: url('/my-project-section-bg.png')
+
+    --tracking-figma-wide: 0.1854em;
+    --tracking-figma-ultra-wide: 0.4354em;
+}
