@@ -2,7 +2,14 @@
 
 @import 'tailwindcss';
 
+@theme {
+    --default-font-family: 'Montserrat', sans-serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+    --background-image-my-project-section: url('/my-project-section-bg.png');
 
+    --tracking-figma-wide: 0.04em;
+    --tracking-figma-ultra-wide: 0.4354em;
+}
 @layer components {
     .slanted-divider {
         @apply absolute -bottom-52 h-[50dvh] w-full bg-white;
@@ -15,11 +22,13 @@
         background-image: url('/my-project-section-bg.png');
         @apply bg-cover bg-center bg-no-repeat;
     }
-}
-
-@theme {
-    --background-image-my-project-section: url('/my-project-section-bg.png')
-
-    --tracking-figma-wide: 0.1854em;
-    --tracking-figma-ultra-wide: 0.4354em;
+    .white-black-radial-bg {
+        @apply bg-radial-[at_50%_60%] from-white to-[#01010120] to-55%;
+    }
+    .form-input {
+        @apply w-full border p-2 border-t-0 border-l-6 border-b-6 border-r-0 placeholder:text-[#8B8B8B] placeholder:font-bold placeholder:text-sm placeholder:tracking-figma-wide;
+    }
+    .section-padding {
+        @apply px-15 py-22;
+    }
 }

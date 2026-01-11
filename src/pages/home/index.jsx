@@ -1,6 +1,12 @@
+import { BiLogoGmail } from 'react-icons/bi'
 import PrimaryButton from '../../components/primaryButton.jsx'
 import SecondaryButton from '../../components/SecondaryButton.jsx'
 import { SOCIAL_LINKS } from '../../data/socialLinks.js'
+import { FaFacebook } from 'react-icons/fa6'
+import emailjs from '@emailjs/browser'
+import { FaPhoneAlt } from 'react-icons/fa'
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 
 function Home() {
     const WHAT_I_DO = [
@@ -48,6 +54,33 @@ function Home() {
             alt: 'Express JS logo',
         },
     ]
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+    const onSubmit = (data) => {
+        setIsLoading(true)
+        console.log('fetched form data:', data)
+        emailjs
+            .send('service_5xjkb8h', 'template-portfolio-sean', data, {
+                publicKey: 'tbEyWCg3Fg66q4_o9',
+            })
+            .then(
+                (response) => {
+                    console.log('SUCCESS!', response.status, response.text)
+                },
+                (error) => {
+                    console.log('FAILED:', error)
+                }
+            )
+        setIsLoading(false)
+    }
+
     return (
         <div>
             <div className='relative h-screen bg-black pt-top-pad overflow-hidden'>
@@ -93,8 +126,8 @@ function Home() {
             </div>
 
             {/* 'at' works as X and Y coordinates */}
-            <div className='bg-radial-[at_50%_60%] from-white to-[#01010120] to-55%'>
-                <div className=' pt-22 px-15 grid gap-12 justify-items-center items-center tracking-wider'>
+            <div className='white-black-radial-bg'>
+                <div className='section-padding grid gap-12 justify-items-center items-center tracking-wider'>
                     <div>
                         <PrimaryButton text='ABOUT ME' />
                     </div>
@@ -147,7 +180,7 @@ function Home() {
                             USING NOW:
                         </div>
 
-                        <div className='grid w-full justify-items-center gap-15 pb-28'>
+                        <div className='grid w-full justify-items-center gap-15'>
                             {USING_NOW.map(({ src, alt, label }, idx) => {
                                 return (
                                     <div
@@ -174,28 +207,22 @@ function Home() {
             </div>
             <div className='bg-neutral-900'>
                 <div>
-                    <div className='grid gap-2 justify-items-center font-semibold text-sm text-center p-6 text-zinc-50'>
-                        TRABILIS - TRAVEL BOOKING WEB APP
-                        <div className='h-px bg-white w-60'></div>
+                    <div className='grid gap-4 justify-items-center font-semibold text-sm text-center p-6 text-zinc-50'>
+                        <div className='grid gap-2 underline underline-offset-10'>
+                            TRABILIS - TRAVEL BOOKING WEB APP
+                        </div>
                     </div>
                 </div>
             </div>
             <div className='grid gap-5 w-full p-6 bg-[url(/my-project-video-demo-bg.png)]'>
-                <video
-                    className='rounded-lg '
-                    controls
-                    playsInline
-                    preload='metadata'
-                >
-                    <source
-                        src='/videos/trabilis-demo.mp4 '
-                        type='video/mp4'
-                        className=''
+                <div className='relative w-full aspect-video rounded-lg overflow-hidden bg-black'>
+                    <video
+                        className='absolute inset-0 w-full transition-opacity duration-500'
+                        playsInline
+                        preload='metadata'
+                        src='/videos/trabilis-demo.mp4'
                     />
-                    <div className='text-red-500'>
-                        Your browser doesn't support the video tag
-                    </div>
-                </video>
+                </div>
                 <div className='grid gap-1 text-zinc-50/80 text-center text-xs'>
                     <div> Live right now! (For Educational Purposes)</div>
                     <a
@@ -207,37 +234,77 @@ function Home() {
                 </div>
             </div>
 
-            <PrimaryButton text='CONTACT' />
+            <div className='white-black-radial-bg section-padding grid gap-12 justify-items-center content-center'>
+                <PrimaryButton text='CONTACT' />
 
-            <div>**Page footer here**</div>
+                <div className='grid gap-2 items-center text-description'>
+                    <div className='flex gap-1'>
+                        <BiLogoGmail size={20} />
+                        <a href='mailto:sjsoriano3545ant@student.fatima.edu.ph'>
+                            sjsoriano3545ant@student.fatima.edu.ph
+                        </a>
+                    </div>
+                    <div className='flex gap-1'>
+                        <FaFacebook size={20} />
+                        <a href='mailto:sjsoriano3545ant@student.fatima.edu.ph'>
+                            @sseanxiety
+                        </a>
+                    </div>
+                    <div className='flex gap-1'>
+                        <FaPhoneAlt size={20} />
+                        <a href='mailto:sjsoriano3545ant@student.fatima.edu.ph'>
+                            09927831240 (DITO)
+                        </a>
+                    </div>
+                </div>
+                <img
+                    src='/glyph-separator.svg'
+                    alt='glyph-separator'
+                />
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className='grid gap-6 w-full justify-items-center'
+                >
+                    <input
+                        className='form-input'
+                        type='text'
+                        placeholder='NAME/COMPANY (OPTIONAL)'
+                        {...register('name')}
+                    />
+                    <input
+                        className='form-input'
+                        type='text'
+                        placeholder='EMAIL*'
+                        {...register('email', { required: true })}
+                    />
+                    <input
+                        className='form-input'
+                        type='text'
+                        placeholder='PHONE NUMBER*'
+                        {...register('number', { required: true })}
+                    />
+                    <textarea
+                        className='form-input h-40'
+                        placeholder='YOUR MESSAGE'
+                        {...register('message')}
+                    ></textarea>
+                    <input
+                        type='hidden'
+                        {...register('honey-pot')}
+                    />
+                    <div className='flex gap-2'>
+                        {(errors.email || errors.number) && (
+                            <span className='text-red-500'>
+                                Fill all required fields.
+                            </span>
+                        )}
+                    </div>
 
-            <form>
-                <input
-                    name='name'
-                    id='name'
-                    type='text'
-                    placeholder='Enter Your Full Name*'
-                />
-                <input
-                    name='email'
-                    id='email'
-                    type='text'
-                    placeholder='Enter Your Email*'
-                />
-                <input
-                    name='number'
-                    id='number'
-                    type='text'
-                    placeholder='Phone Number*'
-                />
-                <textarea
-                    name='message'
-                    id='message'
-                    placeholder='Your Message*'
-                ></textarea>
-
-                <div>Submit</div>
-            </form>
+                    <SecondaryButton
+                        text={isLoading ? 'SUBMITTING' : 'SUBMIT'}
+                    />
+                </form>
+            </div>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom'
 import { Menu } from 'lucide-react'
 import { useWindowScroll } from 'react-use'
 import { ArrowUpFromLine } from 'lucide-react'
-import { SOCIAL_LINKS } from '../../data/socialLinks'
+import { SOCIAL_LINKS } from '../data/socialLinks'
 
 function Logo({ color }) {
     return (
@@ -52,6 +52,10 @@ function HomeLayout() {
     const { y } = useWindowScroll()
     const isScrolled = y > 20
 
+    function handleScroll() {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+    }
+
     return (
         <div>
             {/* NAVBAR */}
@@ -63,17 +67,20 @@ function HomeLayout() {
                 }`}
             >
                 {<Logo color={'text-white'} />}
-                <Menu
+                {/* <Menu
                     size={35}
                     color='white'
-                />
+                /> */}
             </nav>
             <div>
                 <Outlet />
             </div>
 
             <footer className='flex flex-col md:flex-row gap-6 items-center justify-around w-full p-6 text-sm bg-black text-white/80'>
-                <div className='grid gap-2 justify-items-center'>
+                <div
+                    onClick={() => handleScroll()}
+                    className='grid gap-2 justify-items-center'
+                >
                     <ArrowUpFromLine />
                     <div>Back To Top</div>
                 </div>
@@ -82,7 +89,10 @@ function HomeLayout() {
                         const Icon = icon
                         const isLast = index === SOCIAL_LINKS.length - 1
                         return (
-                            <>
+                            <div
+                                className='flex gap-3'
+                                key={index}
+                            >
                                 <a
                                     key={name}
                                     href={link}
@@ -95,7 +105,7 @@ function HomeLayout() {
                                 {!isLast && (
                                     <div className='h-8 w-px bg-white/20'></div>
                                 )}
-                            </>
+                            </div>
                         )
                     })}
                 </div>
