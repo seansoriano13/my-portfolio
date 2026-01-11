@@ -1,5 +1,5 @@
 import { BiLogoGmail } from 'react-icons/bi'
-import PrimaryButton from '../../components/primaryButton.jsx'
+import PrimaryButton from '../../components/PrimaryButtonTemp.jsx'
 import SecondaryButton from '../../components/SecondaryButton.jsx'
 import { SOCIAL_LINKS } from '../../data/socialLinks.js'
 import { FaFacebook } from 'react-icons/fa6'
