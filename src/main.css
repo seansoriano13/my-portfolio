@@ -29,6 +29,6 @@
         @apply w-full border p-2 border-t-0 border-l-6 border-b-6 border-r-0 placeholder:text-[#8B8B8B] placeholder:font-bold placeholder:text-sm placeholder:tracking-figma-wide;
     }
     .section-padding {
-        @apply px-15 py-22;
+        @apply px-10 py-22;
     }
 }

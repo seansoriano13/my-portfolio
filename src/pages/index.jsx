@@ -55,7 +55,7 @@ function Home() {
         },
     ]
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [status, setStatus] = useState('idle')
 
     const {
         register,
@@ -63,22 +63,30 @@ function Home() {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = (data) => {
-        setIsLoading(true)
-        console.log('fetched form data:', data)
-        emailjs
-            .send('service_5xjkb8h', 'template-portfolio-sean', data, {
-                publicKey: 'tbEyWCg3Fg66q4_o9',
-            })
-            .then(
-                (response) => {
-                    console.log('SUCCESS!', response.status, response.text)
-                },
-                (error) => {
-                    console.log('FAILED:', error)
-                }
+    const onSubmit = async (data) => {
+        setStatus('submitting')
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 1000))
+            console.log('im clicked')
+            const response = await emailjs.send(
+                'service_5xjkb8h',
+                'template-portfolio-sean',
+                data,
+                { publicKey: 'tbEyWCg3Fg66q4_o9' }
             )
-        setIsLoading(false)
+            if (response.status === 200) {
+                setStatus('success')
+                console.log('SUCCESS!', response.status, response.text)
+            }
+
+            await new Promise((resolve) => setTimeout(resolve, 3000))
+        } catch (error) {
+            console.error(error)
+            setStatus('error')
+        } finally {
+            setStatus('idle')
+        }
     }
 
     return (
@@ -220,6 +228,7 @@ function Home() {
                         className='absolute inset-0 w-full transition-opacity duration-500'
                         playsInline
                         preload='metadata'
+                        controls
                         src='/videos/trabilis-demo.mp4'
                     />
                 </div>
@@ -240,8 +249,8 @@ function Home() {
                 <div className='grid gap-2 items-center text-description'>
                     <div className='flex gap-1'>
                         <BiLogoGmail size={20} />
-                        <a href='mailto:sjsoriano3545ant@student.fatima.edu.ph'>
-                            sjsoriano3545ant@student.fatima.edu.ph
+                        <a href='mailto:guitarisean@gmail.com'>
+                            guitarisean@gmail.com
                         </a>
                     </div>
                     <div className='flex gap-1'>
@@ -301,7 +310,8 @@ function Home() {
                     </div>
 
                     <SecondaryButton
-                        text={isLoading ? 'SUBMITTING' : 'SUBMIT'}
+                        status={status}
+                        type='submit'
                     />
                 </form>
             </div>

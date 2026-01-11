@@ -2,8 +2,7 @@ function PrimaryButton(props) {
     return (
         <div>
             <button
-                className='p-5 bg-transparent border-6
-        '
+                className={`${props.className} p-5 bg-transparent border-6`}
             >
                 <div className='text-sm font-bold tracking-figma-ultra-wide'>
                     {props.text}
