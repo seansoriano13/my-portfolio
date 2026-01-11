@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser'
 import { FaPhoneAlt } from 'react-icons/fa'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import PrimaryButton from '../../components/primaryButton.jsx'
+import PrimaryButton from '../../components/PrimaryButton.jsx'
 
 function Home() {
     const WHAT_I_DO = [
