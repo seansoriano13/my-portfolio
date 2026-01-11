@@ -1,5 +1,4 @@
 import { BiLogoGmail } from 'react-icons/bi'
-import PrimaryButton from '../../components/PrimaryButtonTemp.jsx'
 import SecondaryButton from '../../components/SecondaryButton.jsx'
 import { SOCIAL_LINKS } from '../../data/socialLinks.js'
 import { FaFacebook } from 'react-icons/fa6'
@@ -7,6 +6,7 @@ import emailjs from '@emailjs/browser'
 import { FaPhoneAlt } from 'react-icons/fa'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
+import PrimaryButton from '../../components/primaryButton.jsx'
 
 function Home() {
     const WHAT_I_DO = [

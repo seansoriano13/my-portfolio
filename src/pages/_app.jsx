@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Menu } from 'lucide-react'
+
 import { useWindowScroll } from 'react-use'
 import { ArrowUpFromLine } from 'lucide-react'
 import { SOCIAL_LINKS } from '../data/socialLinks'
