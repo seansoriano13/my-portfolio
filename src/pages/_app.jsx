@@ -1,13 +1,18 @@
-import { Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 
 import { useWindowScroll } from 'react-use'
 import { ArrowUpFromLine } from 'lucide-react'
 import { SOCIAL_LINKS } from '../data/socialLinks'
+import { Menu, X } from 'lucide-react'
+import { useState } from 'react'
+import { useDebounceCallback } from 'usehooks-ts'
+import { AnimatePresence, motion } from 'motion/react'
+import { Link } from 'react-scroll'
 
 function Logo({ color }) {
     return (
         <svg
-            className={`h-15 ${color}`}
+            className={`h-15 lg:h-25 ${color}`}
             viewBox='0 0 100 100'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
@@ -48,6 +53,27 @@ function Logo({ color }) {
     )
 }
 
+function NavLinks({ setIsOpen }) {
+    const Links = ['Skills', 'Projects', 'Contact']
+
+    return Links.map((link) => {
+        return (
+            <li key={link}>
+                <Link
+                    to={link}
+                    smooth={true}
+                    duration={400}
+                    offset={-40}
+                    onClick={() => setIsOpen(false)}
+                    setIsOpen={setIsOpen}
+                >
+                    {link}
+                </Link>
+            </li>
+        )
+    })
+}
+
 function HomeLayout() {
     const { y } = useWindowScroll()
     const isScrolled = y > 20
@@ -56,27 +82,66 @@ function HomeLayout() {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }
 
+    const [isOpen, setIsOpen] = useState(false)
+
+    function handleClick() {
+        setIsOpen((prev) => !prev)
+    }
+
+    const debounced = useDebounceCallback(handleClick, 100)
+
     return (
         <div>
             {/* NAVBAR */}
             <nav
-                className={`transition-all duration-200 ease-in w-full bg-transparent mx-auto fixed top-0 z-1000 p-4 flex justify-between items-center ${
-                    isScrolled
-                        ? 'bg-transparent backdrop-blur-md shadow-sm py-2'
-                        : 'bg-transparent'
+                className={`w-full transition-all duration-200 ease-in inset-x-0 fixed top-0 z-1000  ${
+                    isScrolled && 'bg-black/10 backdrop-blur-md shadow-sm'
                 }`}
             >
-                {<Logo color={'text-white'} />}
-                {/* <Menu
-                    size={35}
-                    color='white'
-                /> */}
+                <div className='wrapper py-3 flex justify-between items-center'>
+                    {<Logo color={'text-white lg:text-black'} />}
+                    <div
+                        onClick={debounced}
+                        className='lg:hidden'
+                    >
+                        {isOpen ? (
+                            <X
+                                size={35}
+                                color='white'
+                            />
+                        ) : (
+                            <Menu
+                                size={35}
+                                color='white'
+                            />
+                        )}
+                    </div>
+                    <div className='flex text-white list-none gap-12'>
+                        <NavLinks />
+                    </div>
+                </div>
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            key='div'
+                            initial={{ opacity: 0, x: 200 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 200 }}
+                            transition={{ duration: 0.1 }}
+                            className='wrapper bg-transparent backdrop-blur-sm shadow-2xl'
+                        >
+                            <ul className=' grid gap-6 justify-items-center py-6 text-white'>
+                                <NavLinks setIsOpen={setIsOpen} />
+                            </ul>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </nav>
             <div>
                 <Outlet />
             </div>
 
-            <footer className='flex flex-col md:flex-row gap-6 items-center justify-around w-full p-6 text-sm bg-black text-white/80'>
+            <footer className='lg:grid lg:justify-items-center flex flex-col md:flex-row gap-6 items-center justify-around w-full p-6 text-sm bg-black text-white/80'>
                 <div
                     onClick={() => handleScroll()}
                     className='grid gap-2 justify-items-center'

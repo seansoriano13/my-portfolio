@@ -1,34 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 @import 'tailwindcss';
 
 @theme {
     --default-font-family: 'Montserrat', sans-serif;
     --font-montserrat: 'Montserrat', sans-serif;
+    --font-raleway: 'Raleway', sans-serif;
     --background-image-my-project-section: url('/my-project-section-bg.png');
 
     --tracking-figma-wide: 0.04em;
     --tracking-figma-ultra-wide: 0.4354em;
 }
 @layer components {
-    .slanted-divider {
-        @apply absolute -bottom-52 h-[50dvh] w-full bg-white;
-        transform: rotate(-15deg);
+    .wrapper {
+        @apply w-full max-w-7xl mx-auto px-6;
+    }
+    /* Shared Base Styles */
+    /* 1. Shared Styles (The "Base") */
+    .slanted-divider-white,
+    .slanted-divider-black {
+        @apply absolute left-0 w-full h-full;
+        @apply rotate-75;
+        @apply -bottom-80 md:-bottom-130 lg:bottom-0;
+    }
+
+    /* 2. Specific Styles for White */
+    .slanted-divider-white {
+        @apply bg-neutral-300 lg:rotate-0;
+    }
+
+    /* 3. Specific Styles for Black */
+    .slanted-divider-black {
+        @apply bg-black/30 lg:bg-black;
+        @apply lg:-right-[30%] lg:-rotate-75;
     }
     .text-description {
-        @apply font-sans font-light leading-snug text-justify;
+        @apply font-sans font-light leading-snug text-justify lg:text-center;
     }
-    .my-project-section-bg {
-        background-image: url('/my-project-section-bg.png');
-        @apply bg-cover bg-center bg-no-repeat;
-    }
+
     .white-black-radial-bg {
         @apply bg-radial-[at_50%_60%] from-white to-[#01010120] to-55%;
     }
     .form-input {
         @apply w-full border p-2 border-t-0 border-l-6 border-b-6 border-r-0 placeholder:text-[#8B8B8B] placeholder:font-bold placeholder:text-sm placeholder:tracking-figma-wide;
-    }
-    .section-padding {
-        @apply px-10 py-22;
     }
 }
