@@ -95,7 +95,7 @@ function HomeLayout() {
             {/* NAVBAR */}
             <nav
                 className={`w-full transition-all duration-200 ease-in inset-x-0 fixed top-0 z-1000  ${
-                    isScrolled && 'bg-black/10 backdrop-blur-md shadow-sm'
+                    isScrolled && 'bg-black/0 backdrop-blur-md shadow-sm'
                 }`}
             >
                 <div className='wrapper py-3 flex justify-between items-center'>
@@ -116,7 +116,7 @@ function HomeLayout() {
                             />
                         )}
                     </div>
-                    <div className='flex text-white list-none gap-12'>
+                    <div className='hidden sm:flex text-white list-none gap-12 '>
                         <NavLinks />
                     </div>
                 </div>
