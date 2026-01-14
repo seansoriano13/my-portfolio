@@ -293,7 +293,7 @@ function Home() {
                     <div> Live right now! (For Educational Purposes)</div>
                     <a
                         className='lg:text-md text-sm text-centeritalic text-blue-300 hover:underline'
-                        href='https://trabilis.vercel.app/'
+                        href='https://github.com/seansoriano13/trabilis-app'
                     >
                         Trabilis - A Travel Booking Web Application
                     </a>
