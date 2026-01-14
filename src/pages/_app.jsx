@@ -60,6 +60,7 @@ function NavLinks({ setIsOpen }) {
         return (
             <li key={link}>
                 <Link
+                    className='cursor-pointer'
                     to={link}
                     smooth={true}
                     duration={400}
@@ -102,7 +103,7 @@ function HomeLayout() {
                     {<Logo color={'text-white lg:text-black'} />}
                     <div
                         onClick={debounced}
-                        className='lg:hidden'
+                        className='lg:hidden md:hidden'
                     >
                         {isOpen ? (
                             <X
@@ -116,8 +117,8 @@ function HomeLayout() {
                             />
                         )}
                     </div>
-                    <div className='hidden sm:flex text-white list-none gap-12 '>
-                        <NavLinks />
+                    <div className='hidden md:flex sm:flex text-white list-none gap-12'>
+                        <NavLinks setIsOpen={setIsOpen} />
                     </div>
                 </div>
                 <AnimatePresence>
@@ -130,7 +131,7 @@ function HomeLayout() {
                             transition={{ duration: 0.1 }}
                             className='wrapper bg-transparent backdrop-blur-sm shadow-2xl'
                         >
-                            <ul className=' grid gap-6 justify-items-center py-6 text-white'>
+                            <ul className='grid gap-6 justify-items-center py-6 text-white'>
                                 <NavLinks setIsOpen={setIsOpen} />
                             </ul>
                         </motion.div>
