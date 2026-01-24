@@ -6,7 +6,7 @@ import { SOCIAL_LINKS } from '../data/socialLinks'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { useDebounceCallback } from 'usehooks-ts'
-import { AnimatePresence } from 'motion/react'
+import { AnimatePresence, motion as Motion } from 'motion/react'
 import { Link } from 'react-scroll'
 
 function Logo({ color }) {
@@ -123,7 +123,7 @@ function HomeLayout() {
                 </div>
                 <AnimatePresence>
                     {isOpen && (
-                        <motion.div
+                        <Motion.div
                             key='div'
                             initial={{ opacity: 0, x: 200 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -134,7 +134,7 @@ function HomeLayout() {
                             <ul className='grid gap-6 justify-items-center py-6 text-white'>
                                 <NavLinks setIsOpen={setIsOpen} />
                             </ul>
-                        </motion.div>
+                        </Motion.div>
                     )}
                 </AnimatePresence>
             </nav>
