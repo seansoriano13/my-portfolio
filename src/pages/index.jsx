@@ -8,6 +8,11 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import PrimaryButton from '../components/PrimaryButton.jsx'
 import { Link } from 'react-scroll'
+import gsap from 'gsap'
+
+import { useGSAP } from '@gsap/react'
+
+gsap.registerPlugin(useGSAP)
 
 function Home() {
     const WHAT_I_DO = [
@@ -87,15 +92,14 @@ function Home() {
 
     const onSubmit = async (data) => {
         setStatus('submitting')
-
+        const emailJSPublicKey = import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY
         try {
             await new Promise((resolve) => setTimeout(resolve, 1000))
-            console.log('im clicked')
             const response = await emailjs.send(
                 'service_5xjkb8h',
                 'template-portfolio-sean',
                 data,
-                { publicKey: 'tbEyWCg3Fg66q4_o9' }
+                { publicKey: emailJSPublicKey },
             )
             if (response.status === 200) {
                 setStatus('success')
@@ -110,6 +114,25 @@ function Home() {
             setStatus('idle')
         }
     }
+
+    useGSAP(() => {
+        const heroTexts = gsap.utils.toArray('.hero-text')
+
+        gsap.from(heroTexts, {
+            y: '100%',
+            opacity: 0,
+
+            stagger: 0.1,
+        })
+
+        const links = gsap.utils.toArray('.links')
+        gsap.from(links, {
+            rotate: 360,
+            x: -400,
+            stagger: 0.1,
+            opacity: 0,
+        })
+    })
 
     return (
         <div>
@@ -126,15 +149,18 @@ function Home() {
                     src='/black-rectangle.png'
                     alt='black-rectangle.png'
                 />
-                <div className='z-10 wrapper absolute bottom-10 lg:inset-0 items-center lg:items-start lg:gap-6 flex lg:flex-col lg:justify-center justify-between'>
+                <div
+                    id='Home'
+                    className='z-10 wrapper absolute bottom-10 lg:inset-0 items-center lg:items-start lg:gap-6 flex lg:flex-col lg:justify-center justify-between'
+                >
                     <div className='font-raleway text-white lg:text-black w-[80%]'>
-                        <div className='text-lg md:text-5xl lg:text-5xl font-bold'>
+                        <div className='hero-text text-lg md:text-5xl lg:text-5xl font-bold'>
                             Hi, I'm
                         </div>
-                        <div className='text-4xl font-bold md:text-8xl lg:text-8xl lg:w-1/2'>
+                        <div className='hero-text text-4xl font-bold md:text-8xl lg:text-8xl lg:w-1/2'>
                             Sean Soriano
                         </div>
-                        <div className='text-xs text-wrap lg:font-extrabold md:text-xl  lg:text-xl  lg:text-[#909090]'>
+                        <div className='hero-text text-xs text-wrap lg:font-extrabold md:text-xl  lg:text-xl  lg:text-[#909090]'>
                             Information Technology Student & <br /> Aspiring
                             Full-Stack Developer. <br /> Specializing in React &
                             Supabase
@@ -147,7 +173,7 @@ function Home() {
                                 <a
                                     key={name}
                                     href={link}
-                                    className='cursor-pointer'
+                                    className='links cursor-pointer'
                                     rel='noopener noreferrer'
                                     target='_blank'
                                 >
@@ -212,9 +238,8 @@ function Home() {
                                         {ido.description}
                                     </div>
                                     <img
-                                        className='absolute -top-7 -left-7 lg:-left-12'
+                                        className='absolute -top-7 -left-7 lg:-left-12 hover:-rotate-360 scale-125 transition-all duration-300'
                                         src={ido.image}
-                                        alt=''
                                     />
                                 </div>
                             )

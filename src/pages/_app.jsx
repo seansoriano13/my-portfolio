@@ -6,7 +6,7 @@ import { SOCIAL_LINKS } from '../data/socialLinks'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { useDebounceCallback } from 'usehooks-ts'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence } from 'motion/react'
 import { Link } from 'react-scroll'
 
 function Logo({ color }) {
@@ -54,7 +54,7 @@ function Logo({ color }) {
 }
 
 function NavLinks({ setIsOpen }) {
-    const Links = ['Skills', 'Projects', 'Contact']
+    const Links = ['Home', 'Skills', 'Projects', 'Contact']
 
     return Links.map((link) => {
         return (
