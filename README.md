@@ -1,3 +1,3 @@
 # Welcome to my Portfolio!
 
-Live: [https://my-portfolio-mkcx.vercel.app/](Sean Soriano)
+Live: [Sean Soriano](https://my-portfolio-mkcx.vercel.app/)
