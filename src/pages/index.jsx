@@ -296,32 +296,59 @@ function Home() {
                 <PrimaryButton text='PROJECTS' />
             </div>
             <div className='bg-neutral-900'>
-                <div>
+                <div className='grid grid-cols-2'>
                     <div className='grid gap-4 justify-items-center font-semibold text-sm lg:text-lg text-center p-6 lg:py-10 text-zinc-50'>
                         <div className='grid gap-2 underline underline-offset-10'>
                             TRABILIS - TRAVEL BOOKING WEB APP
                         </div>
                     </div>
+                    <div className='grid gap-4 justify-items-center font-semibold text-sm lg:text-lg text-center p-6 lg:py-10 text-zinc-50'>
+                        <div className='grid gap-2 underline underline-offset-10'>
+                            ANDURIL CLONE - SEAN SORIANO
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className='grid gap-5 w-full p-6 lg:p-22  bg-[url(/my-project-video-demo-bg.png)] bg-no-repeat bg-cover object-cover'>
-                <div className='relative w-full aspect-video rounded-lg overflow-hidden bg-black lg:w-5xl mx-auto'>
-                    <video
-                        className='absolute inset-0 w-full transition-opacity duration-500'
-                        playsInline
-                        preload='metadata'
-                        controls
-                        src='/videos/trabilis-demo.mp4'
-                    />
+            <div className='grid gap-6 grid-cols-2 w-full p-6 lg:p-22  bg-[url(/my-project-video-demo-bg.png)] bg-no-repeat bg-cover object-cover'>
+                <div className=''>
+                    <div className='relative w-full aspect-video rounded-lg overflow-hidden bg-black mx-auto'>
+                        <video
+                            className='absolute inset-0 w-full transition-opacity duration-500'
+                            playsInline
+                            preload='metadata'
+                            controls
+                            src='/videos/trabilis-demo.mp4'
+                        />
+                    </div>
+                    <div className='grid gap-1 lg:text-lg text-zinc-50/80 text-center text-xs'>
+                        <div> Live right now! (For Educational Purposes)</div>
+                        <a
+                            className='lg:text-md text-sm text-centeritalic text-blue-300 hover:underline'
+                            href='https://github.com/seansoriano13/trabilis-app'
+                        >
+                            Trabilis - A Travel Booking Web Application
+                        </a>
+                    </div>
                 </div>
-                <div className='grid gap-1 lg:text-lg text-zinc-50/80 text-center text-xs'>
-                    <div> Live right now! (For Educational Purposes)</div>
-                    <a
-                        className='lg:text-md text-sm text-centeritalic text-blue-300 hover:underline'
-                        href='https://github.com/seansoriano13/trabilis-app'
-                    >
-                        Trabilis - A Travel Booking Web Application
-                    </a>
+                <div>
+                    <div className='relative w-full aspect-video rounded-lg overflow-hidden bg-black mx-auto'>
+                        <video
+                            className='absolute inset-0 w-full transition-opacity duration-500'
+                            playsInline
+                            preload='metadata'
+                            controls
+                            src='/videos/anduril-demo.mp4'
+                        />
+                    </div>
+                    <div className='grid gap-1 lg:text-lg text-zinc-50/80 text-center text-xs'>
+                        <div> Live right now! (Under Development)</div>
+                        <a
+                            className='lg:text-md text-sm text-centeritalic text-blue-300 hover:underline'
+                            href='https://github.com/seansoriano13/trabilis-app'
+                        >
+                            Anduril - Clone By Sean Soriano
+                        </a>
+                    </div>
                 </div>
             </div>
 
