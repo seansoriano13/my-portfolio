@@ -344,7 +344,7 @@ function Home() {
                         <div> Live right now! (Under Development)</div>
                         <a
                             className='lg:text-md text-sm text-centeritalic text-blue-300 hover:underline'
-                            href='https://github.com/seansoriano13/trabilis-app'
+                            href='https://anduril-clone-seanxiety.vercel.app/'
                         >
                             Anduril - Clone By Sean Soriano
                         </a>
